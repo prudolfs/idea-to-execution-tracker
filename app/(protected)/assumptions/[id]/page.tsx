@@ -18,11 +18,11 @@ export default async function AssumptionDetailPage(props: {
   }
 
   const { idea, experiments } = assumption
-  // We can show all experiments or just the first one if we want to mimic the old behavior, 
+  // We can show all experiments or just the first one if we want to mimic the old behavior,
   // but it's better to show all if the schema supports it.
-  
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
+    <div className="animate-fade-in mx-auto max-w-3xl space-y-6">
       <div className="flex items-center gap-4">
         <Link href="/assumptions">
           <Button variant="ghost" size="icon">
@@ -31,9 +31,11 @@ export default async function AssumptionDetailPage(props: {
         </Link>
         <div className="flex-1">
           <Link href={`/ideas/${idea.id}`} className="hover:underline">
-            <p className="text-sm text-muted-foreground">{idea.title}</p>
+            <p className="text-muted-foreground text-sm">{idea.title}</p>
           </Link>
-          <h1 className="text-2xl font-bold text-foreground">{assumption.assumption}</h1>
+          <h1 className="text-foreground text-2xl font-bold">
+            {assumption.assumption}
+          </h1>
         </div>
         <DeleteAssumptionButton id={assumption.id} />
       </div>
@@ -41,23 +43,27 @@ export default async function AssumptionDetailPage(props: {
       <GlassCard>
         <div className="space-y-6">
           <ConfidenceSlider value={assumption.confidenceLevel} readonly />
-          
+
           {assumption.whyItMatters && (
             <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Why This Matters</h3>
+              <h3 className="text-muted-foreground mb-2 text-sm font-medium">
+                Why This Matters
+              </h3>
               <p className="text-foreground">{assumption.whyItMatters}</p>
             </div>
           )}
 
           <div>
-            <h3 className="text-sm font-medium text-muted-foreground mb-2">Proposed Experiment</h3>
+            <h3 className="text-muted-foreground mb-2 text-sm font-medium">
+              Proposed Experiment
+            </h3>
             <p className="text-foreground">{assumption.proposedExperiment}</p>
           </div>
         </div>
       </GlassCard>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-foreground">Experiments</h2>
+        <h2 className="text-foreground text-xl font-semibold">Experiments</h2>
         <Link href={`/experiments/new?assumptionId=${assumption.id}`}>
           <Button size="sm">
             <Plus className="h-4 w-4" />
@@ -69,22 +75,32 @@ export default async function AssumptionDetailPage(props: {
       {experiments && experiments.length > 0 ? (
         <div className="space-y-4">
           {experiments.map((experiment) => (
-            <Link key={experiment.id} href={`/experiments/${experiment.id}`} className="block">
+            <Link
+              key={experiment.id}
+              href={`/experiments/${experiment.id}`}
+              className="block"
+            >
               <GlassCard hoverable>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-foreground">{experiment.name}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{experiment.hypothesis}</p>
+                    <p className="text-foreground font-medium">
+                      {experiment.name}
+                    </p>
+                    <p className="text-muted-foreground mt-1 text-sm">
+                      {experiment.hypothesis}
+                    </p>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                  <ArrowRight className="text-muted-foreground h-5 w-5" />
                 </div>
               </GlassCard>
             </Link>
           ))}
         </div>
       ) : (
-        <GlassCard className="text-center py-8">
-          <p className="text-muted-foreground mb-4">No experiments yet. Turn this assumption into action.</p>
+        <GlassCard className="py-8 text-center">
+          <p className="text-muted-foreground mb-4">
+            No experiments yet. Turn this assumption into action.
+          </p>
           <Link href={`/experiments/new?assumptionId=${assumption.id}`}>
             <Button variant="outline" size="sm">
               <Plus className="h-4 w-4" />
@@ -96,4 +112,3 @@ export default async function AssumptionDetailPage(props: {
     </div>
   )
 }
-

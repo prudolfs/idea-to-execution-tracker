@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { GlassCard } from "@/components/glass-card"
-import { ConfidenceSlider } from "@/components/confidence-slider"
-import { createAssumption } from "@/app/actions/assumptions"
+import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { GlassCard } from '@/components/glass-card'
+import { ConfidenceSlider } from '@/components/confidence-slider'
+import { createAssumption } from '@/app/actions/assumptions'
 
 interface Idea {
   id: string
@@ -23,15 +23,15 @@ interface AssumptionFormProps {
 export function AssumptionForm({ ideas }: AssumptionFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const preselectedIdeaId = searchParams.get("ideaId") || ""
+  const preselectedIdeaId = searchParams.get('ideaId') || ''
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [formData, setFormData] = useState({
     ideaId: preselectedIdeaId,
-    assumption: "",
+    assumption: '',
     confidenceLevel: 50,
-    whyItMatters: "",
-    proposedExperiment: "",
+    whyItMatters: '',
+    proposedExperiment: '',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,20 +47,20 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
       })
       // Server action handles redirect
     } catch (error) {
-      console.error("Failed to create assumption:", error)
+      console.error('Failed to create assumption:', error)
       setIsSubmitting(false)
       // Ideally show a toast or error message here
     }
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+    <div className="animate-fade-in mx-auto max-w-2xl space-y-6">
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-2xl font-bold text-foreground">New Assumption</h1>
+          <h1 className="text-foreground text-2xl font-bold">New Assumption</h1>
           <p className="text-muted-foreground">Make hidden beliefs explicit</p>
         </div>
       </div>
@@ -72,9 +72,11 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
             <select
               id="ideaId"
               value={formData.ideaId}
-              onChange={(e) => setFormData({ ...formData, ideaId: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, ideaId: e.target.value })
+              }
               required
-              className="w-full h-10 px-3 rounded-lg bg-input border border-border text-foreground focus:ring-2 focus:ring-ring"
+              className="bg-input border-border text-foreground focus:ring-ring h-10 w-full rounded-lg border px-3 focus:ring-2"
             >
               <option value="">Select an idea...</option>
               {ideas.map((idea) => (
@@ -91,14 +93,18 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
               id="assumption"
               placeholder='e.g., "SMEs will pay €25–50/month"'
               value={formData.assumption}
-              onChange={(e) => setFormData({ ...formData, assumption: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, assumption: e.target.value })
+              }
               required
             />
           </div>
 
           <ConfidenceSlider
             value={formData.confidenceLevel}
-            onChange={(value) => setFormData({ ...formData, confidenceLevel: value })}
+            onChange={(value) =>
+              setFormData({ ...formData, confidenceLevel: value })
+            }
           />
 
           <div className="space-y-2">
@@ -107,7 +113,9 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
               id="whyItMatters"
               placeholder="Short rationale..."
               value={formData.whyItMatters}
-              onChange={(e) => setFormData({ ...formData, whyItMatters: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, whyItMatters: e.target.value })
+              }
               rows={2}
             />
           </div>
@@ -118,18 +126,25 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
               id="proposedExperiment"
               placeholder="Plain-English description of how to test it..."
               value={formData.proposedExperiment}
-              onChange={(e) => setFormData({ ...formData, proposedExperiment: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, proposedExperiment: e.target.value })
+              }
               rows={3}
               required
             />
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.back()}
+              disabled={isSubmitting}
+            >
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : "Create Assumption"}
+              {isSubmitting ? 'Creating...' : 'Create Assumption'}
             </Button>
           </div>
         </form>
@@ -137,4 +152,3 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
     </div>
   )
 }
-
