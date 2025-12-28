@@ -21,7 +21,10 @@
     "paths": {
       "@/*": ["./*"],
       "@/db": ["./db"],
-      "@/auth": ["./auth"]
+      "@/auth": ["./auth"],
+      "@/types": ["./types"],
+      "@/components": ["./components"],
+      "@/stores": ["./stores"]
     }
   },
   "include": [

@@ -123,3 +123,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .glass-card {
+    background: linear-gradient(180deg, hsl(222 47% 10% / 0.8) 0%, hsl(222 47% 8% / 0.9) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+  }
+}

@@ -74,9 +74,7 @@ export default function SignUpPage() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
-          <CardDescription>
-            Create an account to get started.
-          </CardDescription>
+          <CardDescription>Create an account to get started.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -132,7 +130,7 @@ export default function SignUpPage() {
           </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Already have an account?{' '}
             <Link href="/signin" className="text-primary hover:underline">
               Sign in
@@ -143,4 +141,3 @@ export default function SignUpPage() {
     </div>
   )
 }
-
