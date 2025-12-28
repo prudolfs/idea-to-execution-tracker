@@ -27,11 +27,12 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const formSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email(),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -39,6 +40,7 @@ export default function SignInPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: '',
       email: '',
       password: '',
     },
@@ -48,15 +50,16 @@ export default function SignInPage() {
     setError(null)
     setLoading(true)
     try {
-      const { data, error } = await authClient.signIn.email({
+      const { data, error } = await authClient.signUp.email({
         email: values.email,
         password: values.password,
+        name: values.name,
       })
 
       if (error) {
-        setError(error.message || 'An error occurred during sign in')
+        setError(error.message || 'An error occurred during sign up')
       } else {
-        router.push('/')
+        router.push('/signin')
       }
     } catch (err) {
       console.error(err)
@@ -70,14 +73,27 @@ export default function SignInPage() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 p-4 dark:bg-black">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Sign In</CardTitle>
+          <CardTitle>Sign Up</CardTitle>
           <CardDescription>
-            Enter your email and password to access your account.
+            Create an account to get started.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John Doe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"
@@ -110,16 +126,16 @@ export default function SignInPage() {
               />
               {error && <div className="text-sm text-red-500">{error}</div>}
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'Signing in...' : 'Sign In'}
+                {loading ? 'Signing up...' : 'Sign Up'}
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
-            Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-primary hover:underline">
-              Sign up
+            Already have an account?{' '}
+            <Link href="/signin" className="text-primary hover:underline">
+              Sign in
             </Link>
           </p>
         </CardFooter>
@@ -127,3 +143,4 @@ export default function SignInPage() {
     </div>
   )
 }
+
