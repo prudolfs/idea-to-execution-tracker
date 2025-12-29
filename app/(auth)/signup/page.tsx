@@ -59,7 +59,7 @@ export default function SignUpPage() {
       if (error) {
         setError(error.message || 'An error occurred during sign up')
       } else {
-        router.push('/signin')
+        router.push('/dashboard')
       }
     } catch (err) {
       console.error(err)
