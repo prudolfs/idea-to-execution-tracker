@@ -9,45 +9,65 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { GlassCard } from '@/components/glass-card'
 import { ConfidenceSlider } from '@/components/confidence-slider'
-import { createAssumption } from '@app/actions/assumptions'
+import { createAssumption, updateAssumption } from '@app/actions/assumptions'
 
 interface Idea {
   id: string
   title: string
 }
 
-interface AssumptionFormProps {
-  ideas: Idea[]
+interface Assumption {
+  id: string
+  ideaId: string
+  assumption: string
+  confidenceLevel: number
+  whyItMatters: string | null
+  proposedExperiment: string
 }
 
-export function AssumptionForm({ ideas }: AssumptionFormProps) {
+interface AssumptionFormProps {
+  ideas: Idea[]
+  initialData?: Assumption
+}
+
+export function AssumptionForm({ ideas, initialData }: AssumptionFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const preselectedIdeaId = searchParams.get('ideaId') || ''
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [formData, setFormData] = useState({
-    ideaId: preselectedIdeaId,
-    assumption: '',
-    confidenceLevel: 50,
-    whyItMatters: '',
-    proposedExperiment: '',
+    ideaId: initialData?.ideaId || preselectedIdeaId,
+    assumption: initialData?.assumption || '',
+    confidenceLevel: initialData?.confidenceLevel || 50,
+    whyItMatters: initialData?.whyItMatters || '',
+    proposedExperiment: initialData?.proposedExperiment || '',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     try {
-      await createAssumption({
-        ideaId: formData.ideaId,
-        assumption: formData.assumption,
-        confidenceLevel: formData.confidenceLevel,
-        whyItMatters: formData.whyItMatters,
-        proposedExperiment: formData.proposedExperiment,
-      })
+      if (initialData) {
+        await updateAssumption(initialData.id, {
+          ideaId: formData.ideaId,
+          assumption: formData.assumption,
+          confidenceLevel: formData.confidenceLevel,
+          whyItMatters: formData.whyItMatters,
+          proposedExperiment: formData.proposedExperiment,
+        })
+      } else {
+        await createAssumption({
+          ideaId: formData.ideaId,
+          assumption: formData.assumption,
+          confidenceLevel: formData.confidenceLevel,
+          whyItMatters: formData.whyItMatters,
+          proposedExperiment: formData.proposedExperiment,
+        })
+      }
       // Server action handles redirect
     } catch (error) {
-      console.error('Failed to create assumption:', error)
+      console.error('Failed to save assumption:', error)
       setIsSubmitting(false)
       // Ideally show a toast or error message here
     }
@@ -60,8 +80,14 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-foreground text-2xl font-bold">New Assumption</h1>
-          <p className="text-muted-foreground">Make hidden beliefs explicit</p>
+          <h1 className="text-foreground text-2xl font-bold">
+            {initialData ? 'Edit Assumption' : 'New Assumption'}
+          </h1>
+          <p className="text-muted-foreground">
+            {initialData
+              ? 'Update your assumption details'
+              : 'Make hidden beliefs explicit'}
+          </p>
         </div>
       </div>
 
@@ -144,7 +170,13 @@ export function AssumptionForm({ ideas }: AssumptionFormProps) {
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Creating...' : 'Create Assumption'}
+              {isSubmitting
+                ? initialData
+                  ? 'Updating...'
+                  : 'Creating...'
+                : initialData
+                  ? 'Update Assumption'
+                  : 'Create Assumption'}
             </Button>
           </div>
         </form>

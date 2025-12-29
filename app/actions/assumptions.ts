@@ -133,6 +133,54 @@ export async function createAssumption(data: {
   redirect('/assumptions')
 }
 
+export async function updateAssumption(
+  id: string,
+  data: {
+    ideaId: string
+    assumption: string
+    confidenceLevel: number
+    whyItMatters?: string
+    proposedExperiment: string
+  },
+) {
+  const session = await getSession()
+  if (!session) {
+    throw new Error('Unauthorized')
+  }
+
+  const existingAssumption = await getAssumption(id)
+  if (!existingAssumption) {
+    throw new Error('Assumption not found or unauthorized')
+  }
+
+  // If changing ideas, verify new idea belongs to user
+  if (data.ideaId !== existingAssumption.ideaId) {
+    const idea = await db.query.ideas.findFirst({
+      where: and(eq(ideas.id, data.ideaId), eq(ideas.userId, session.user.id)),
+    })
+
+    if (!idea) {
+      throw new Error('Target idea not found or unauthorized')
+    }
+  }
+
+  await db
+    .update(assumptions)
+    .set({
+      ...data,
+      updatedAt: new Date(),
+    })
+    .where(eq(assumptions.id, id))
+
+  revalidatePath('/assumptions')
+  revalidatePath(`/assumptions/${id}`)
+  revalidatePath(`/ideas/${data.ideaId}`)
+  if (data.ideaId !== existingAssumption.ideaId) {
+    revalidatePath(`/ideas/${existingAssumption.ideaId}`)
+  }
+  redirect(`/assumptions/${id}`)
+}
+
 export async function deleteAssumption(id: string) {
   const session = await getSession()
   if (!session) {

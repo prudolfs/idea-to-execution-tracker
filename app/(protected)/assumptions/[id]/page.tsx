@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Trash2, Plus, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Trash2, Plus, ArrowRight, Pencil } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { GlassCard } from '@/components/glass-card'
 import { ConfidenceSlider } from '@/components/confidence-slider'
@@ -37,7 +37,14 @@ export default async function AssumptionDetailPage(props: {
             {assumption.assumption}
           </h1>
         </div>
-        <DeleteAssumptionButton id={assumption.id} />
+        <div className="flex gap-2">
+          <Link href={`/assumptions/${assumption.id}/edit`}>
+            <Button variant="outline" size="icon">
+              <Pencil className="h-5 w-5" />
+            </Button>
+          </Link>
+          <DeleteAssumptionButton id={assumption.id} />
+        </div>
       </div>
 
       <GlassCard>
