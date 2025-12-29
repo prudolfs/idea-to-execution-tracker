@@ -2,7 +2,7 @@ import { getExperiment } from '@app/actions/experiments'
 import { GlassCard } from '@/components/glass-card'
 import { StatusBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Plus, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Plus, ArrowRight, Edit } from 'lucide-react'
 import Link from 'next/link'
 import { DeleteExperimentButton } from './delete-experiment-button'
 import { ExperimentStatusUpdater } from './experiment-status-updater'
@@ -42,7 +42,14 @@ export default async function ExperimentDetailPage(props: {
             <StatusBadge status={experiment.status as ExperimentStatus} />
           </div>
         </div>
-        <DeleteExperimentButton id={experiment.id} />
+        <div className="flex items-center gap-2">
+          <Link href={`/experiments/${experiment.id}/edit`}>
+            <Button variant="outline" size="icon">
+              <Edit className="h-5 w-5" />
+            </Button>
+          </Link>
+          <DeleteExperimentButton id={experiment.id} />
+        </div>
       </div>
 
       <GlassCard>

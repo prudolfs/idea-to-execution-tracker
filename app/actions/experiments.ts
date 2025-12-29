@@ -144,6 +144,7 @@ export async function updateExperiment(
 
   revalidatePath('/experiments')
   revalidatePath(`/experiments/${id}`)
+  redirect(`/experiments/${id}`)
 }
 
 export async function deleteExperiment(id: string) {

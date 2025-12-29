@@ -168,7 +168,6 @@ export async function updateAssumption(
     .update(assumptions)
     .set({
       ...data,
-      updatedAt: new Date(),
     })
     .where(eq(assumptions.id, id))
 
