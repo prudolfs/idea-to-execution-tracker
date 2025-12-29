@@ -9,7 +9,10 @@ import {
   HelpCircle,
   FlaskConical,
   BarChart3,
+  LogOut,
 } from 'lucide-react'
+import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -21,6 +24,17 @@ const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/')
+        },
+      },
+    })
+  }
 
   return (
     <aside className="border-border bg-sidebar fixed top-0 left-0 z-40 h-screen w-64 border-r">
@@ -63,14 +77,13 @@ export function Sidebar() {
 
         {/* Footer */}
         <div className="border-border border-t p-4">
-          <div className="glass-card rounded-lg p-4">
-            <p className="text-muted-foreground text-xs">
-              Evidence beats vibes.
-            </p>
-            <p className="text-primary mt-1 text-xs font-medium">
-              Keep validating →
-            </p>
-          </div>
+          <button
+            onClick={handleSignOut}
+            className="text-muted-foreground hover:bg-secondary hover:text-foreground flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200"
+          >
+            <LogOut className="h-5 w-5" />
+            Sign Out
+          </button>
         </div>
       </div>
     </aside>

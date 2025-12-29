@@ -1,8 +1,19 @@
 import Link from 'next/link'
 import { FlaskConical } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { auth } from '@/auth'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
+
+  if (session) {
+    redirect('/dashboard')
+  }
+
   return (
     <div className="bg-background relative flex min-h-screen flex-col items-center justify-center">
       {/* Top right navigation */}
