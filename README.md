@@ -1,3 +1,5 @@
+![Chat App](preview.gif)
+
 # Validate
 
 **Validate** is an idea-to-execution tracker designed to help entrepreneurs and creators rigorously test their business ideas. Instead of jumping straight into building, Validate guides you through a structured process of identifying assumptions, running experiments, and tracking results to ensure you're solving a real problem for a real market.
