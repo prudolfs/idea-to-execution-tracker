@@ -24,7 +24,9 @@
       "@/auth": ["./auth"],
       "@/types": ["./types"],
       "@/components": ["./components"],
-      "@/stores": ["./stores"]
+      "@/stores": ["./stores"],
+      "@app/actions": ["./app/actions"],
+      "@app/actions/*": ["./app/actions/*"]
     }
   },
   "include": [

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { createExperiment } from '@/app/actions/experiments'
+import { createExperiment } from '@app/actions/experiments'
 import { GlassCard } from '@/components/glass-card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'

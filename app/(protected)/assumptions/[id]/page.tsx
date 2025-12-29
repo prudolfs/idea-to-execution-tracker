@@ -4,7 +4,7 @@ import { ArrowLeft, Trash2, Plus, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { GlassCard } from '@/components/glass-card'
 import { ConfidenceSlider } from '@/components/confidence-slider'
-import { getAssumption } from '@/app/actions/assumptions'
+import { getAssumption } from '@app/actions/assumptions'
 import { DeleteAssumptionButton } from './delete-assumption-button'
 
 export default async function AssumptionDetailPage(props: {

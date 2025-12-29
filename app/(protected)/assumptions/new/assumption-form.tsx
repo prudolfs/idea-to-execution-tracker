@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { GlassCard } from '@/components/glass-card'
 import { ConfidenceSlider } from '@/components/confidence-slider'
-import { createAssumption } from '@/app/actions/assumptions'
+import { createAssumption } from '@app/actions/assumptions'
 
 interface Idea {
   id: string

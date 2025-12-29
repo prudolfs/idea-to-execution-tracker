@@ -3,8 +3,8 @@ import { Plus, HelpCircle, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { GlassCard } from '@/components/glass-card'
 import { ConfidenceSlider } from '@/components/confidence-slider'
-import { getAssumptions } from '@/app/actions/assumptions'
-import { getIdeas } from '@/app/actions/ideas'
+import { getAssumptions } from '@app/actions/assumptions'
+import { getIdeas } from '@app/actions/ideas'
 
 export const dynamic = 'force-dynamic'
 

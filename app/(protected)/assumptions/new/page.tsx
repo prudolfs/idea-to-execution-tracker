@@ -1,4 +1,4 @@
-import { getIdeas } from '@/app/actions/ideas'
+import { getIdeas } from '@app/actions/ideas'
 import { AssumptionForm } from './assumption-form'
 
 export default async function NewAssumptionPage() {

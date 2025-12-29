@@ -1,4 +1,4 @@
-import { getAssumptions } from '@/app/actions/assumptions'
+import { getAssumptions } from '@app/actions/assumptions'
 import { ExperimentForm } from './experiment-form'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'

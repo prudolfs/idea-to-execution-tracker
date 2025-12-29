@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteResult } from '@/actions/results'
+import { deleteResult } from '@app/actions/results'
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
 

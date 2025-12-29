@@ -1,6 +1,6 @@
 'use client'
 
-import { updateExperiment } from '@/app/actions/experiments'
+import { updateExperiment } from '@app/actions/experiments'
 import { ExperimentStatus } from '@/types'
 import { Button } from '@/components/ui/button'
 

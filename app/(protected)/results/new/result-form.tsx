@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createResult } from '@/actions/results'
+import { createResult } from '@app/actions/results'
 import { GlassCard } from '@/components/glass-card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -41,9 +41,10 @@ interface ExperimentOption {
   id: string
   name: string
   assumption: {
-    idea: {
-      title: string
-    }
+    assumption: string
+  }
+  idea: {
+    title: string
   }
 }
 
@@ -84,7 +85,7 @@ export function ResultForm({
   const getContextForExperiment = (experimentId: string) => {
     const experiment = experiments.find((e) => e.id === experimentId)
     if (!experiment) return ''
-    return `${experiment.assumption.idea.title}: ${experiment.name}`
+    return `${experiment.idea.title}: ${experiment.name}`
   }
 
   return (

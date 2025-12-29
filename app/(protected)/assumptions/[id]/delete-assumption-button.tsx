@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { deleteAssumption } from '@/app/actions/assumptions'
+import { deleteAssumption } from '@app/actions/assumptions'
 
 export function DeleteAssumptionButton({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false)

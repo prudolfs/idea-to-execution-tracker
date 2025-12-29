@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
-import { deleteIdea } from '@/app/actions/ideas'
+import { deleteIdea } from '@app/actions/ideas'
 import { useState } from 'react'
 
 export function DeleteIdeaButton({ id }: { id: string }) {

@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { ArrowLeft } from 'lucide-react'
 import { Stage } from '@/types'
-import { createIdea } from '@/app/actions/ideas'
+import { createIdea } from '@app/actions/ideas'
 
 const stages: Stage[] = ['idea', 'testing', 'validation', 'launch']
 

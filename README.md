@@ -1,8 +1,10 @@
 ![Chat App](preview.gif)
 
-# Validate
+# IDEA TO EXECUTION TRACKER
 
-**Validate** is an idea-to-execution tracker designed to help entrepreneurs and creators rigorously test their business ideas. Instead of jumping straight into building, Validate guides you through a structured process of identifying assumptions, running experiments, and tracking results to ensure you're solving a real problem for a real market.
+**Live Preview:** [Your idea to execution tracker](https://idea-to-execution-tracker.vercel.app/)
+
+**IDEA TO EXECUTION TRACKER** is an idea-to-execution tracker designed to help entrepreneurs and creators rigorously test their business ideas. Instead of jumping straight into building, Validate guides you through a structured process of identifying assumptions, running experiments, and tracking results to ensure you're solving a real problem for a real market.
 
 ## 🚀 Features
 

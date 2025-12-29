@@ -2,7 +2,7 @@
 
 import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { deleteExperiment } from '@/app/actions/experiments'
+import { deleteExperiment } from '@app/actions/experiments'
 
 export function DeleteExperimentButton({ id }: { id: string }) {
   const handleDelete = async () => {

@@ -1,5 +1,5 @@
-import { getExperiments } from '@/app/actions/experiments'
-import { getAssumptions } from '@/app/actions/assumptions'
+import { getExperiments } from '@app/actions/experiments'
+import { getAssumptions } from '@app/actions/assumptions'
 import { GlassCard } from '@/components/glass-card'
 import { StatusBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'

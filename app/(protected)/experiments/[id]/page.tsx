@@ -1,4 +1,4 @@
-import { getExperiment } from '@/app/actions/experiments'
+import { getExperiment } from '@app/actions/experiments'
 import { GlassCard } from '@/components/glass-card'
 import { StatusBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'

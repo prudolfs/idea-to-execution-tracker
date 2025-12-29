@@ -1,4 +1,4 @@
-import { getIdeas } from '@/app/actions/ideas'
+import { getIdeas } from '@app/actions/ideas'
 import { GlassCard } from '@/components/glass-card'
 import { StageBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'

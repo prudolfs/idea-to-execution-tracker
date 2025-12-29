@@ -1,4 +1,4 @@
-import { getExperiments } from '@/actions/experiments'
+import { getExperiments } from '@app/actions/experiments'
 import { ResultForm } from './result-form'
 
 interface PageProps {

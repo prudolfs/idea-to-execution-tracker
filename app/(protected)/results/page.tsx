@@ -1,4 +1,4 @@
-import { getResults } from '@/app/actions/results'
+import { getResults } from '@app/actions/results'
 import { GlassCard } from '@/components/glass-card'
 import { OutcomeBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'
