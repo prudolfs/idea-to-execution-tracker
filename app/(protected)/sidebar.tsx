@@ -22,7 +22,12 @@ const navItems = [
   { to: '/results', icon: BarChart3, label: 'Results' },
 ]
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean
+  onClose?: () => void
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -37,7 +42,12 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="border-border bg-sidebar fixed top-0 left-0 z-40 h-screen w-64 border-r">
+    <aside
+      className={cn(
+        'border-border bg-sidebar fixed top-0 left-0 z-40 h-screen w-64 border-r transition-transform duration-300 md:translate-x-0',
+        isOpen ? 'translate-x-0' : '-translate-x-full',
+      )}
+    >
       <div className="flex h-full flex-col">
         {/* Logo */}
         <div className="border-border flex h-16 items-center gap-3 border-b px-6">
@@ -61,6 +71,7 @@ export function Sidebar() {
               <Link
                 key={item.to}
                 href={item.to}
+                onClick={onClose}
                 className={cn(
                   'flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200',
                   isActive
