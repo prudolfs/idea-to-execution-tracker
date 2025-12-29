@@ -5,8 +5,7 @@ export default function Layout({
 }>) {
   return (
     <div className="min-h-screen bg-background">
-      {/* <Sidebar /> */}
-      <main className="pl-64">
+      <main >
         <div className="min-h-screen p-8">
           {children}
         </div>
