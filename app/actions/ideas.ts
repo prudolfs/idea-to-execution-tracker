@@ -62,6 +62,32 @@ export async function createIdea(data: {
   redirect('/ideas')
 }
 
+export async function updateIdea(
+  id: string,
+  data: {
+    title: string
+    targetMarket: string
+    coreConcept: string
+    problemToSolve: string
+    stage: Stage
+    primaryNextStep: string
+  },
+) {
+  const session = await getSession()
+  if (!session) {
+    throw new Error('Unauthorized')
+  }
+
+  await db
+    .update(ideas)
+    .set(data)
+    .where(and(eq(ideas.id, id), eq(ideas.userId, session.user.id)))
+
+  revalidatePath('/ideas')
+  revalidatePath(`/ideas/${id}`)
+  redirect(`/ideas/${id}`)
+}
+
 export async function deleteIdea(id: string) {
   const session = await getSession()
   if (!session) {

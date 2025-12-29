@@ -2,7 +2,7 @@ import { getIdea } from '@app/actions/ideas'
 import { GlassCard } from '@/components/glass-card'
 import { StageBadge } from '@/components/badges'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Plus, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Plus, ArrowRight, Pencil } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { DeleteIdeaButton } from './delete-idea-button'
@@ -35,7 +35,14 @@ export default async function IdeaDetailPage(props: {
           </div>
           <p className="text-muted-foreground">{idea.targetMarket}</p>
         </div>
-        <DeleteIdeaButton id={idea.id} />
+        <div className="flex items-center gap-2">
+          <Link href={`/ideas/${idea.id}/edit`}>
+            <Button variant="outline" size="icon">
+              <Pencil className="h-4 w-4" />
+            </Button>
+          </Link>
+          <DeleteIdeaButton id={idea.id} />
+        </div>
       </div>
 
       <GlassCard>
